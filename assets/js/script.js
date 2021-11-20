@@ -37,3 +37,5 @@ var saveEvent = function (event) {
     localStorage.setItem("Event Data", JSON.stringify(eventsArr));
   };
   
+// Event listener to be able to save
+$(".saveBtn").on("click", saveEvent);
