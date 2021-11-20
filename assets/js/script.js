@@ -1,16 +1,32 @@
+eventsArr = [];
 // current date and time to change every second 
 const dateTime = new Date();
 document.getElementById("currentDay").innerHTML = dateTime;
 
 // function to make the date and time update every second
 setInterval(function(){
-    document.getElementById("currentDay").innerHTML = new Date()}, 1000)
+    document.getElementById("currentDay").innerHTML = new Date()
+}, 1000);
 
 // adding/editing text area
 $(".description").on("click", "textarea", function () {
     var textInput = $("<textarea>").addClass("form-control").val(text);
     textInput.trigger("focus");
-  });
+});
+
+// loading events if any from local storage
+var loadEvents = function () {
+    eventsArr = JSON.parse(localStorage.getItem("Event Data"));
+  
+    let localStorageData = localStorage.getItem("Event Data");
+    if (localStorageData !== null) {
+      localStorageData = JSON.parse(localStorageData);
+      for (i = 0; i < localStorageData.length; i++) {
+        document.getElementById(localStorageData[i].id).value =
+          localStorageData[i].description;
+      }
+    }
+};
 
 // saving the data to local storage
 var saveEvent = function (event) {
@@ -35,7 +51,8 @@ var saveEvent = function (event) {
     }
     // send the information collected into local storage
     localStorage.setItem("Event Data", JSON.stringify(eventsArr));
-  };
+};
   
 // Event listener to be able to save
 $(".saveBtn").on("click", saveEvent);
+loadEvents();
