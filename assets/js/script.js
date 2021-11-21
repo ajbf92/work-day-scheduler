@@ -16,11 +16,14 @@ setInterval(function () {
       .replace("pm", "");
     // conditional statement comparing the actual hour with the hour id to assign a color
     if (hours < newDBA) {
-      document.getElementsByClassName("description")[i].classList.add("future");
+        document.getElementsByClassName("description")[i].placeholder = "Add Event";
+        document.getElementsByClassName("description")[i].classList.add("future");
     } else if (hours == newDBA) {
-      document.getElementsByClassName("description")[i].classList.add("present");
+        document.getElementsByClassName("description")[i].placeholder = "Current Hour: Add Event";
+        document.getElementsByClassName("description")[i].classList.add("present");
     } else if (hours > newDBA) {
-      document.getElementsByClassName("description")[i].classList.add("past");
+        document.getElementsByClassName("description")[i].placeholder = "";
+        document.getElementsByClassName("description")[i].classList.add("past");
     }
   }
 }, 1000);
