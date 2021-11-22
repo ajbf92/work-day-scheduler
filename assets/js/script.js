@@ -1,3 +1,4 @@
+let eventsArr = [];
 // current date and time to change every second
 const dateTime = new Date();
 document.getElementById("currentDay").innerHTML = dateTime;
@@ -24,6 +25,7 @@ setInterval(function () {
     } else if (hours > newDBA) {
         document.getElementsByClassName("description")[i].placeholder = "";
         document.getElementsByClassName("description")[i].classList.add("past");
+        document.getElementsByClassName("description")[i].disabled = true;
     }
   }
 }, 1000);
@@ -36,7 +38,7 @@ $(".description").on("click", "textarea", function () {
 
 // loading events if any from local storage
 var loadEvents = function () {
-  eventsArr = JSON.parse(localStorage.getItem("Event Data"));
+  eventsArr = JSON.parse(localStorage.getItem("Event Data")) || [];
 
   let localStorageData = localStorage.getItem("Event Data");
   if (localStorageData !== null) {
@@ -50,7 +52,6 @@ var loadEvents = function () {
 
 // saving the data to local storage
 var saveEvent = function (event) {
-  eventsArr = [];
   // targeting the area to get the id
   const textareaId = "x-" + event.target.id;
 
